@@ -118,8 +118,8 @@ alias show='nala show'
 " >> $PREFIX/etc/bash.bashrc
 
 #Download Wallpaper
-wget https://raw.githubusercontent.com/wahyu22010/bengkel/main/peakpx.jpg
-wget https://raw.githubusercontent.com/wahyu22010/bengkel/main/dark_waves.png
+wget https://raw.githubusercontent.com/garuda04/bengkel/main/peakpx.jpg
+wget https://raw.githubusercontent.com/garuda04/bengkel/main/dark_waves.png
 mv peakpx.jpg $PREFIX/share/backgrounds/xfce/
 mv dark_waves.png $PREFIX/share/backgrounds/xfce/
 
@@ -154,21 +154,21 @@ rm Meslo.zip
 rm LICENSE.txt
 rm readme.md
 
-wget https://github.com/wahyu22010/bengkel/raw/main/NotoColorEmoji-Regular.ttf
+wget https://github.com/garuda04/bengkel/raw/main/NotoColorEmoji-Regular.ttf
 mv NotoColorEmoji-Regular.ttf .fonts
 
-wget https://github.com/wahyu22010/bengkel/raw/main/font.ttf
+wget https://github.com/garuda04/bengkel/raw/main/font.ttf
 mv font.ttf .termux/font.ttf
 
 #Setup Fancybash Termux
-wget https://raw.githubusercontent.com/wahyu22010/bengkel/main/fancybash.sh
+wget https://raw.githubusercontent.com/garuda04/bengkel/main/fancybash.sh
 mv fancybash.sh .fancybash.sh
 echo "source $HOME/.fancybash.sh" >> $PREFIX/etc/bash.bashrc
 sed -i "326s/\\\u/$username/" $HOME/.fancybash.sh
 sed -i "327s/\\\h/termux/" $HOME/.fancybash.sh
 
 #Autostart Conky
-wget https://github.com/wahyu22010/bengkel/raw/main/config.tar.gz
+wget https://github.com/garuda04/bengkel/raw/main/config.tar.gz
 tar -xvzf config.tar.gz
 rm config.tar.gz
 chmod +x .config/autostart/conky.desktop
@@ -239,7 +239,7 @@ cp .fancybash.sh $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$user
 echo "source ~/.fancybash.sh" >> $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.bashrc
 sed -i '327s/termux/proot/' $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fancybash.sh
 
-wget https://github.com/wahyu22010/bengkel/raw/main/conky.tar.gz
+wget https://github.com/garuda04/bengkel/raw/main/conky.tar.gz
 tar -xvzf conky.tar.gz
 rm conky.tar.gz
 mkdir $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.config
@@ -257,7 +257,7 @@ mkdir $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fonts
 cp .fonts/NotoColorEmoji-Regular.ttf $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fonts/ 
 
 #Setup Hardware Acceleration
-pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/wahyu22010/bengkel/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240421_arm64.deb
+pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/garuda04/bengkel/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240421_arm64.deb
 pd login debian --shared-tmp -- env DISPLAY=:1.0 sudo apt install -y ./mesa-vulkan-kgsl_24.1.0-devel-20240421_arm64.deb
 
 
