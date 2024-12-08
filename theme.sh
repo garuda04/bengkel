@@ -22,6 +22,7 @@ mv Fluent-icon-theme-2023-02-01/cursors/dist-dark $PREFIX/share/icons/
 rm -rf $HOME//Fluent*
 rm 2023-02-01.zip
 
+
 #Setup Fonts
 wget https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip
 mkdir .fonts 
