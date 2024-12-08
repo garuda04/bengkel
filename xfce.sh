@@ -1,5 +1,32 @@
 #!/bin/bash
 
+username="$1"
+
+pkgs=('git' 'neofetch' 'virglrenderer-android' 'papirus-icon-theme' 'xfce4' 'xfce4-goodies' 'eza' 'pavucontrol-qt' 'bat' 'jq' 'nala' 'wmctrl' 'firefox' 'netcat-openbsd' 'termux-x11-nightly' 'eza')
+
+#Install xfce4 desktop and additional packages
+pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
+
+#Put Firefox icon on Desktop
+cp $PREFIX/share/applications/firefox.desktop $HOME/Desktop 
+chmod +x $HOME/Desktop/firefox.desktop
+
+#Set aliases
+echo "
+alias bengkel='proot-distro login bengkel --user $username --shared-tmp'
+#alias zrun='proot-distro login bengkel --user $username --shared-tmp -- env DISPLAY=:1.0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform '
+#alias zrunhud='proot-distro login bengkel --user $username --shared-tmp -- env DISPLAY=:1.0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform GALLIUM_HUD=fps '
+alias hud='GALLIUM_HUD=fps '
+alias ls='eza -lF --icons'
+alias cat='bat '
+alias apt='nala '
+alias install='nala install -y '
+alias uninstall='nala remove -y '
+alias search='nala search '
+alias list='nala list --upgradeable'
+alias show='nala show'
+" >> $PREFIX/etc/bash.bashrc
+
 #Download Wallpaper
 wget https://raw.githubusercontent.com/wahyu22010/bengkel/main/peakpx.jpg
 wget https://raw.githubusercontent.com/wahyu22010/bengkel/main/dark_waves.png
@@ -50,36 +77,9 @@ echo "source $HOME/.fancybash.sh" >> $PREFIX/etc/bash.bashrc
 sed -i "326s/\\\u/$username/" $HOME/.fancybash.sh
 sed -i "327s/\\\h/termux/" $HOME/.fancybash.sh
 
-#Autostart 
-#Create autostart directory
-if [ ! -d "$HOME/.config/autostart" ]; then
-    mkdir -p "$HOME/.config/autostart"
-fi
+#Autostart Conky
+wget https://github.com/wahyu22010/bengkel/raw/main/config.tar.gz
+tar -xvzf config.tar.gz
+rm config.tar.gz
+chmod +x .config/autostart/conky.desktop
 
-#Conky
-cp $PREFIX/var/lib/proot-distro/installed-rootfs/debian/usr/share/applications/conky.desktop $HOME/.config/autostart/
-sed -i 's|^Exec=.*$|Exec=prun conky -c .config/conky/Alterf/Alterf.conf|' $HOME/.config/autostart/conky.desktop
-
-
-#Proot Theming
-#Setup Fancybash Proot
-cp .fancybash.sh $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username
-echo "source ~/.fancybash.sh" >> $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.bashrc
-sed -i '327s/termux/proot/' $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fancybash.sh
-
-wget https://github.com/wahyu22010/bengkel/raw/main/conky.tar.gz
-tar -xvzf conky.tar.gz
-rm conky.tar.gz
-mkdir $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.config
-mv .config/conky/ $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.config
-mv .config/neofetch $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.config
-
-#Set theming from xfce to proot
-cp -r $PREFIX/share/icons/dist-dark $PREFIX/var/lib/proot-distro/installed-rootfs/debian/usr/share/icons/dist-dark
-
-cat <<'EOF' > $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.Xresources
-Xcursor.theme: dist-dark
-EOF
-
-mkdir $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fonts/
-cp .fonts/NotoColorEmoji-Regular.ttf $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fonts/ 

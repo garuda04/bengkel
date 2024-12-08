@@ -1,9 +1,9 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=cp2menu
+Name=copy
 Comment=
-Exec=cp2menu
+Exec=copy
 Icon=edit-move
 Categories=System;
 Path=
