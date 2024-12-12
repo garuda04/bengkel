@@ -191,8 +191,6 @@ finish() {
 
 trap finish EXIT
 
-username="$1"
-
 pkgs_proot=('sudo' 'wget' 'nala' 'jq' 'conky-all')
 
 #Install Debian proot
