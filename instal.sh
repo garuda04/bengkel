@@ -246,7 +246,7 @@ mv .config/neofetch $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$u
 
 #Set theming from xfce to proot
 cp -r $PREFIX/share/icons/dist-dark $PREFIX/var/lib/proot-distro/installed-rootfs/debian/usr/share/icons/dist-dark
-
+  
 cat <<'EOF' > $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.Xresources
 Xcursor.theme: dist-dark
 EOF
@@ -383,9 +383,6 @@ element selected {
     background-color: #2e343f;
 }
 EOF
-
-# Pastikan dependencies terinstal
-check_dependencies
 
 # Konfigurasi rofi jika belum ada
 [ ! -f ~/.config/rofi/config.rasi ] && configure_rofi
