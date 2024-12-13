@@ -482,29 +482,12 @@ read -p "Do you want to install WO (y/n): " choice
 
 if [[ "$choice" == "yes" ]]; then
 
+
     pd login debian --shared-tmp -- env DISPLAY=:1.0 sudo apt install gdebi libreoffice -y
-    clear ; pd login debian --shared-tmp -- env DISPLAY=:1.0 wget -qO- https://kantor.wahyupratama-purba2004.workers.dev/0:/WO.deb | pv > WO.deb
+    pd login debian --shared-tmp -- env DISPLAY=:1.0 wget -qO- https://kantor.wahyupratama-purba2004.workers.dev/0:/WO.deb | pv > WO.deb
     pd login debian --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install ./WO.deb -y
     pd login debian --shared-tmp -- env DISPLAY=:1.0 rm -rf WO.deb
 
-    echo "[Desktop Entry]
-Version=1.0
-Type=Application
-Name=WPS OFFICE
-Comment=WPS OFFICE TO WORK
-Exec=proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 /usr/bin/wps %F
-Icon=wps-office2019-2019-kpromotheus
-Categories=Office;
-Path=
-Terminal=false
-StartupNotify=false
-
-" > $HOME/Desktop/wps-office-promotheus.desktop
-
-    chmod +x $HOME/Desktop/wps-office-promotheus.desktop 
-    cp $HOME/Desktop/wps-office-promotheus.desktop $HOME/../usr/share/applications/wps-office-promotheus.desktop
-
-   
     echo "WO has been installed successfully ."
 else
     echo "Installation of WO has been skipped."
