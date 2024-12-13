@@ -286,7 +286,7 @@ chmod +x $PREFIX/bin/zrunhud
 
 #copy utility ... Allows copying of Debian proot desktop menu items into Termux xfce menu to allow for launching programs from Debian proot from within the xfce menu rather than launching from terminal. 
 
-cat <<'EOF' > $PREFIX/bin/cp2menu
+cat <<'EOF' > $PREFIX/bin/copy
 #!/bin/bash
 
 cd
@@ -460,7 +460,7 @@ Version=1.0
 Type=Application
 Name=Visual Studio Code
 Comment=Code Editing. Redefined.
-Exec=proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 /usr/share/code/code --no-sandbox
+Exec=proot-distro login debian --user $varname --sha red-tmp -- env DISPLAY=:1.0 /usr/share/code/code --no-sandbox
 Icon=visual-studio-code
 Categories=Development;
 Path=
